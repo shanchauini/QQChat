@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Forms;
-// using MySql.Data.MySqlClient; // 稍后需要取消注释并添加 MySQL Connector/NET 引用
+using MySql.Data.MySqlClient;
 
 namespace QQChat
 {
@@ -40,49 +40,35 @@ namespace QQChat
             }
             else // 普通用户登录
             {
-                // 此处需要数据库验证逻辑
-                // 示例: 
-                // using (MySqlConnection connection = new MySqlConnection(connectionString))
-                // {
-                //     try
-                //     {
-                //         connection.Open();
-                //         string query = "SELECT IsApproved, IsBanned FROM Users WHERE UserName = @UserName AND PSW = @PSW";
-                //         MySqlCommand command = new MySqlCommand(query, connection);
-                //         command.Parameters.AddWithValue("@UserName", username);
-                //         command.Parameters.AddWithValue("@PSW", password); // 注意：实际应用中密码应加密存储和比较
-                //         MySqlDataReader reader = command.ExecuteReader();
-                //         if (reader.Read())
-                //         {
-                //             bool isApproved = reader.GetBoolean("IsApproved");
-                //             bool isBanned = reader.GetBoolean("IsBanned");
-                //             if (!isApproved)
-                //             {
-                //                 MessageBox.Show("账号尚待管理员审核，请耐心等待。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //             }
-                //             else if (isBanned)
-                //             {
-                //                 MessageBox.Show("该账号已被禁用，请联系管理员。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //             }
-                //             else
-                //             {
-                //                 MessageBox.Show("用户登录成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //                 UserMainPage userMainPage = new UserMainPage(); // 传递用户信息
-                //                 userMainPage.Show();
-                //                 this.Hide();
-                //             }
-                //         }
-                //         else
-                //         {
-                //             MessageBox.Show("用户名或密码错误!", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //         }
-                //     }
-                //     catch (Exception ex)
-                //     {
-                //         MessageBox.Show("数据库连接失败: " + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //     }
-                // }
-                MessageBox.Show("用户登录功能暂未实现数据库连接。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string sql = "SELECT UserId, IsApproved, IsBanned FROM Users WHERE UserId = @UserId AND PSW = @PSW";
+                var p1 = new MySqlParameter("@UserId", username); // 账号输入框内容视为UserId
+                var p2 = new MySqlParameter("@PSW", password);
+                var dt = DataAccess.ExecuteQuery(sql, p1, p2);
+                if (dt.Rows.Count > 0)
+                {
+                    int userId = Convert.ToInt32(dt.Rows[0]["UserId"]);
+                    bool isApproved = Convert.ToBoolean(dt.Rows[0]["IsApproved"]);
+                    bool isBanned = Convert.ToBoolean(dt.Rows[0]["IsBanned"]);
+                    if (!isApproved)
+                    {
+                        MessageBox.Show("账号尚待管理员审核，请耐心等待。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (isBanned)
+                    {
+                        MessageBox.Show("该账号已被禁用，请联系管理员。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("用户登录成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UserMainPage userMainPage = new UserMainPage(userId); // 传递用户ID
+                        userMainPage.Show();
+                        this.Hide();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("用户名或密码错误!", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -92,6 +78,16 @@ namespace QQChat
             registerPage.Show();
             // 可以选择关闭登录窗口或隐藏，取决于产品设计
             // this.Hide(); 
+        }
+
+        private void LoginPage_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoginPage_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 } 

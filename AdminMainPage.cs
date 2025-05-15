@@ -12,23 +12,27 @@ namespace QQChat
 
         private void miReviewRegistration_Click(object sender, EventArgs e)
         {
-            ReviewRegistrationPage reviewPage = new ReviewRegistrationPage();
-            reviewPage.MdiParent = this; // 如果希望子窗口在主窗口内打开
+            var reviewPage = new ReviewRegistrationPage();
             reviewPage.Show();
         }
 
         private void miBanAccount_Click(object sender, EventArgs e)
         {
-            BanAccountPage banPage = new BanAccountPage();
-            banPage.MdiParent = this; // 如果希望子窗口在主窗口内打开
+            var banPage = new BanAccountPage();
             banPage.Show();
         }
 
         private void miManageMessages_Click(object sender, EventArgs e)
         {
-            ManageMessagePage manageMessagePage = new ManageMessagePage();
-            manageMessagePage.MdiParent = this; // 如果希望子窗口在主窗口内打开
+            var manageMessagePage = new ManageMessagePage();
             manageMessagePage.Show();
+        }
+
+        private void miLogout_Click(object sender, EventArgs e)
+        {
+            LoginPage loginPage = new LoginPage();
+            loginPage.Show();
+            this.Close();
         }
 
         // 为了使 MdiParent 生效, AdminMainPage 需要设置 IsMdiContainer = true
@@ -36,6 +40,11 @@ namespace QQChat
         private void AdminMainPage_Load(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
+        }
+
+        private void AdminMainPage_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 } 

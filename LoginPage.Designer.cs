@@ -42,18 +42,18 @@ namespace QQChat
             // lblUserType
             // 
             this.lblUserType.AutoSize = true;
-            this.lblUserType.Location = new System.Drawing.Point(250, 100);
+            this.lblUserType.Location = new System.Drawing.Point(250, 92);
             this.lblUserType.Name = "lblUserType";
-            this.lblUserType.Size = new System.Drawing.Size(59, 13);
+            this.lblUserType.Size = new System.Drawing.Size(59, 12);
             this.lblUserType.TabIndex = 0;
             this.lblUserType.Text = "用户类型:";
             // 
             // rbAdmin
             // 
             this.rbAdmin.AutoSize = true;
-            this.rbAdmin.Location = new System.Drawing.Point(320, 98);
+            this.rbAdmin.Location = new System.Drawing.Point(320, 90);
             this.rbAdmin.Name = "rbAdmin";
-            this.rbAdmin.Size = new System.Drawing.Size(59, 17);
+            this.rbAdmin.Size = new System.Drawing.Size(72, 26);
             this.rbAdmin.TabIndex = 1;
             this.rbAdmin.Text = "管理员";
             this.rbAdmin.UseVisualStyleBackColor = true;
@@ -62,9 +62,9 @@ namespace QQChat
             // 
             this.rbUser.AutoSize = true;
             this.rbUser.Checked = true;
-            this.rbUser.Location = new System.Drawing.Point(390, 98);
+            this.rbUser.Location = new System.Drawing.Point(390, 90);
             this.rbUser.Name = "rbUser";
-            this.rbUser.Size = new System.Drawing.Size(71, 17);
+            this.rbUser.Size = new System.Drawing.Size(84, 26);
             this.rbUser.TabIndex = 2;
             this.rbUser.TabStop = true;
             this.rbUser.Text = "普通用户";
@@ -73,41 +73,41 @@ namespace QQChat
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(250, 140);
+            this.lblUsername.Location = new System.Drawing.Point(250, 129);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(35, 13);
+            this.lblUsername.Size = new System.Drawing.Size(35, 12);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Text = "账号:";
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(320, 137);
+            this.txtUsername.Location = new System.Drawing.Point(320, 126);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(180, 20);
+            this.txtUsername.Size = new System.Drawing.Size(180, 21);
             this.txtUsername.TabIndex = 4;
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(250, 180);
+            this.lblPassword.Location = new System.Drawing.Point(250, 166);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(35, 13);
+            this.lblPassword.Size = new System.Drawing.Size(35, 12);
             this.lblPassword.TabIndex = 5;
             this.lblPassword.Text = "密码:";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(320, 177);
+            this.txtPassword.Location = new System.Drawing.Point(320, 163);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(180, 20);
+            this.txtPassword.Size = new System.Drawing.Size(180, 21);
             this.txtPassword.TabIndex = 6;
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(320, 220);
+            this.btnLogin.Location = new System.Drawing.Point(320, 203);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.Size = new System.Drawing.Size(75, 21);
             this.btnLogin.TabIndex = 7;
             this.btnLogin.Text = "登录";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -116,9 +116,9 @@ namespace QQChat
             // llblRegister
             // 
             this.llblRegister.AutoSize = true;
-            this.llblRegister.Location = new System.Drawing.Point(425, 225);
+            this.llblRegister.Location = new System.Drawing.Point(425, 208);
             this.llblRegister.Name = "llblRegister";
-            this.llblRegister.Size = new System.Drawing.Size(55, 13);
+            this.llblRegister.Size = new System.Drawing.Size(65, 12);
             this.llblRegister.TabIndex = 8;
             this.llblRegister.TabStop = true;
             this.llblRegister.Text = "注册新用户";
@@ -126,9 +126,9 @@ namespace QQChat
             // 
             // LoginPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 415);
             this.Controls.Add(this.llblRegister);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
@@ -141,8 +141,10 @@ namespace QQChat
             this.Name = "LoginPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "登录";
+            this.Load += new System.EventHandler(this.LoginPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
